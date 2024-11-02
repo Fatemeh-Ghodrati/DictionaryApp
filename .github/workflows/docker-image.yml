@@ -22,8 +22,8 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build . -t rpg8/wordapi-web:latest:new_dictionary_api
+        docker build . -t rpg8/wordapi-web:latest
 
     - name: Push Docker image
       run: |
-        docker push rpg8/wordapi-web:latest:new_dictionary_api
+        docker push rpg8/wordapi-web:latest
