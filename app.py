@@ -28,7 +28,7 @@ def get_word_meaning(word):
     else:
         return jsonify({"error": response.status_code, "message": response.text}), response.status_code
 
-@app.route('/random_word', methods=['GET'])
+@app.route('/random_words', methods=['GET'])
 def get_random_word():
     api_url = 'https://api.api-ninjas.com/v1/randomword'
     response = requests.get(api_url, headers={'X-Api-Key': app.config['API_KEY']})
