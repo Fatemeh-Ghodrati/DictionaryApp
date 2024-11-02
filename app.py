@@ -19,9 +19,12 @@ def get_word_meaning(word):
     response = requests.get(api_url, headers={'X-Api-Key': app.config['API_KEY']})
 
     if response.status_code == requests.codes.ok:
-        meaning = response.json().get('meaning')
-        r.setex(word, app.config['CACHE_TIMEOUT'], meaning)
-        return jsonify({"result": meaning, "source": "api-ninjas"}), 200
+        meaning = response.json().get('definition')
+        if meaning:
+            r.setex(word, app.config['CACHE_TIMEOUT'], meaning)
+            return jsonify({"meaning": meaning})
+        else:
+            return jsonify({"error": "Meaning not found in the response"}), 404
     else:
         return jsonify({"error": response.status_code, "message": response.text}), response.status_code
 
